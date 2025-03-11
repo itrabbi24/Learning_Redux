@@ -7,9 +7,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useAppSelector } from "@/redux/hooks";
+import { setAnswer } from "@/redux/features/Quiz/quizSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import QuizControl from "./QuizControl";
 
 export default function Question() {
+
+  const dispatch = useAppDispatch();
+
   const { question, currentQuestionIndex } = useAppSelector(
     (state) => state.quiz
   );
@@ -18,7 +23,7 @@ export default function Question() {
 
 
   const handleAnswer =(answer : string) => {
-
+    dispatch(setAnswer({ questionIndex: currentQuestionIndex, answer }));
   }
 
   return (
@@ -33,14 +38,12 @@ export default function Question() {
           </CardHeader>
           <CardContent>
             {currentQuestion.options.map((option, index) => (
-              <Button size={"lg"} className="w-full mt-3" key={index}>
+              <Button onClick={() => handleAnswer(option)} size={"lg"} className="w-full mt-3" key={index}>
                 {option}
               </Button>
             ))}
+            <QuizControl></QuizControl>
           </CardContent>
-          <CardFooter className="flex justify-between">
-            Button are here
-          </CardFooter>
         </Card>
       </div>
     </>
