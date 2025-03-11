@@ -3,7 +3,7 @@ import { completeQuiz, nextQuestion, prevQuestion } from "@/redux/features/Quiz/
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 export default function QuizControl() {
-  const { question, currentQuestionIndex, userAnswer, quizComplete } = useAppSelector(
+  const { question, currentQuestionIndex, userAnswer } = useAppSelector(
     (state) => state.quiz
   );
 
@@ -21,7 +21,11 @@ export default function QuizControl() {
     dispatch(completeQuiz());
   }
 
+  
   const isAnswerSelected = userAnswer[currentQuestionIndex] !== null;
+  
+  const isCompleteQuiz =  isAnswerSelected || currentQuestionIndex !== question.length - 1; 
+
 
   return (
     <div className="flex justify-between mt-4 space-x-4">
@@ -40,7 +44,7 @@ export default function QuizControl() {
       )}
 
       {currentQuestionIndex === question.length - 1 && (
-        <Button disabled={!quizComplete}  onClick={handleComplete} className="bg-orange-700">Complete Quiz</Button>
+        <Button disabled={!isCompleteQuiz}  onClick={handleComplete} className="bg-orange-700">Complete Quiz</Button>
       )}
     </div>
   );
