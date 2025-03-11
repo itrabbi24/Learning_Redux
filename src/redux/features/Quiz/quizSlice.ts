@@ -21,8 +21,14 @@ const initialState : TQuiz = {
 export const quizSlice = createSlice({
     name: 'quiz',
     initialState,
-    reducers: {}
+    reducers: {
+        setAnswer: (state, action) => {
+
+        },
+    }
 });
 
 
-export default quizSlice.reducer
+
+export const { setAnswer } = quizSlice.actions;
+export default quizSlice.reducer;
