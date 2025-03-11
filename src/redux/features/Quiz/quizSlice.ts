@@ -1,10 +1,20 @@
 import { quizData } from '@/home/quizData';
-import { createSlice, current } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 
-const initialState = {
+interface TQuiz {
+    question: typeof quizData;
+    currentQuestionIndex : number;
+    userAnswer : (string | null)[];
+    quizComplete : boolean;
+}
+
+
+const initialState : TQuiz = {
     question: quizData,
-    currentQuestionIndex: 0
+    currentQuestionIndex: 0,
+    userAnswer: Array(quizData.length).fill(null),
+    quizComplete : false
 }
 
 
