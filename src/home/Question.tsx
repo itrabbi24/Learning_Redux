@@ -12,19 +12,24 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import QuizControl from "./QuizControl";
 
 export default function Question() {
-
   const dispatch = useAppDispatch();
 
-  const { question, currentQuestionIndex } = useAppSelector(
+  const { question, currentQuestionIndex, userAnswer } = useAppSelector(
     (state) => state.quiz
   );
+
   const currentQuestion = question[currentQuestionIndex];
-  console.log(currentQuestion);
 
+  const currentAnswer = userAnswer[currentQuestionIndex];
 
-  const handleAnswer =(answer : string) => {
+  const handleAnswer = (answer: string) => {
     dispatch(setAnswer({ questionIndex: currentQuestionIndex, answer }));
-  }
+  };
+
+
+
+
+
 
   return (
     <>
@@ -38,7 +43,13 @@ export default function Question() {
           </CardHeader>
           <CardContent>
             {currentQuestion.options.map((option, index) => (
-              <Button onClick={() => handleAnswer(option)} size={"lg"} className="w-full mt-3" key={index}>
+              <Button
+                onClick={() => handleAnswer(option)}
+                size={"lg"}
+                className="w-full mt-3"
+                key={index}
+                variant={currentAnswer === option ? "default" : "outline"}
+              >
                 {option}
               </Button>
             ))}
