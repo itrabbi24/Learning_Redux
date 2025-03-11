@@ -1,14 +1,12 @@
 import './App.css'
-import { Button } from "@/components/ui/button"
+import Question from './home/Question'
 
 
 function App() {
 
   return (
     <>
-<div className="flex flex-col items-center justify-center min-h-svh">
-      <Button>Click me</Button>
-    </div>
+      <Question></Question>
     </>
   )
 }
