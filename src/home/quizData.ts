@@ -1,4 +1,4 @@
-const quizData = [
+export const quizData = [
     {
       "id": 1,
       "question": "বাংলাদেশের রাজধানী কোনটি?",
